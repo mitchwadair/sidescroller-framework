@@ -3,12 +3,12 @@ SFramework extends upon some of the capability built into CraftStudio.
 
 # Content
 - [GameObject](#gameobject)
-  - [Accessors](#gameobject-accessors)
+  - [Accessors](#accessors)
   - [GetSpriteRenderer](#gameobjectgetspriterenderer)
   - [CreateSpriteRenderer](#gameobjectcreatespriterenderer)
 
 # GameObject
-## GameObject accessors
+## Accessors
 ```cs
 GameObject.spriteRenderer
 ```
