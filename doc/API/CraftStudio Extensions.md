@@ -21,7 +21,7 @@ local mySpriteRenderer = self.gameObject:GetSpriteRenderer()
 ## GameObject:CreateSpriteRenderer
 Creates a new SpriteRenderer.
 ### Arguments:
-- `sprite` (optional) a Font asset to set the default sprite to
+- `sprite` - `CS Asset` (optional) a Font asset to set the default sprite to
 ### Examples:
 #### Creating Empty
 ```cs
