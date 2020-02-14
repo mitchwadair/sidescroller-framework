@@ -9,7 +9,11 @@ Welcome to SFramework!
 ## Overview
 SFramework is a framework for [CraftStudio](https://sparklinlabs.itch.io/craftstudio) to facilitate easier development of 2D games.
 
-The framework is designed with CraftStudio's current APIs in mind.  For this reason, you'll notice similar function/behavior definitions for various components.
+The framework is designed with CraftStudio's current APIs in mind.  For this reason, you'll notice similar function/behavior definitions for various components. The goal of SFramework is to make development of 2D games easy in as many aspects as possible. So, what can it do?
+### Sprites
+SFramework makes sprites and sprite animation in CraftStudio easier than ever.  Use Font assets to create spritesheets and let SFramework do the rest!
+![](https://i.imgur.com/G7hPae5.gif)
+
 
 ## Learn
 API documentation and tutorials can be found in the [doc](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc) folder of this repository.
