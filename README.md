@@ -1,7 +1,7 @@
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contribute)
-[![GitHub Release](https://img.shields.io/github/release/mitchwadair/sidescroller-framework.svg)]()
-[![GitHub Downloads](https://img.shields.io/github/downloads/mitchwadair/sidescroller-framework/total.svg)]()
+[![GitHub Release](https://img.shields.io/github/release/mitchwadair/sidescroller-framework.svg)](https://github.com/mitchwadair/sidescroller-framework/releases)
+[![GitHub Downloads](https://img.shields.io/github/downloads/mitchwadair/sidescroller-framework/total.svg)](https://github.com/mitchwadair/sidescroller-framework/releases)
 
 # SFramework
 Welcome to SFramework!
