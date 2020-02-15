@@ -29,5 +29,5 @@ local mySpriteRendererEmpty = self.gameObject:CreateSpriteRenderer()
 ```
 #### Creating with a Default Sprite
 ```cs
-local mySpriteRenderer = self.gameObject:CreateSpriteRenderer(CS.FindAsset("path to Font Asset", "Font"))
+local mySpriteRenderer = self.gameObject:CreateSpriteRenderer(CS.FindAsset("Sprites/Sample/SampleSprite", "Font"))
 ```
