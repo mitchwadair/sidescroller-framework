@@ -1,4 +1,4 @@
---[[ Sidescroller Framework V0.2.0 ]]--
+--[[ Sidescroller Framework V0.2.1 ]]--
 --[[ Made by Mitchell Adair ]]--
 
 function Behavior:Awake()
@@ -38,9 +38,9 @@ end
     @param sprite the Asset to assign
 ]]--
 function Behavior:SetSprite(sprite)
-    self.sprite = sprite
     self.gameObject.textRenderer:SetFont(sprite)
     self.gameObject.textRenderer:SetText(" ")
+    self.sprite = sprite
 end
 
 --[[
@@ -53,11 +53,15 @@ function Behavior:SetAnimation(animationAsset, numFrames)
     if numFrames == nil then
         error("missing required argument 'numFrames' in SetAnimation call")
         return
+    else if type(numFrames) ~= "number" then
+        error("argument 'numFrames' in SetAnimation call should be a number")
+        return
     end
-    self.currentAnimation = animationAsset
     self.gameObject.textRenderer:SetFont(animationAsset)
+    self.currentAnimation = animationAsset
     self.currentAnimFrame = 0
     self.numFrames = numFrames
+    self.animCounter = 0
 end
 
 --[[
@@ -75,6 +79,10 @@ end
     @param ticks the number of game ticks for the frame to last
 ]]--
 function Behavior:SetAnimationFrameDuration(ticks)
+    if type(ticks) ~= "number" then
+        error("argument 'ticks' in SetAnimationFrameDuration call should be a number")
+        return
+    end
     self.animSpeed = ticks
 end
 
@@ -165,5 +173,5 @@ function Behavior:Update()
     end
 end
 
---[[ Sidescroller Framework V0.2.0 ]]--
+--[[ Sidescroller Framework V0.2.1 ]]--
 --[[ Made by Mitchell Adair ]]--

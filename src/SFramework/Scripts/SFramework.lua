@@ -1,4 +1,4 @@
---[[ Sidescroller Framework V0.2.0 ]]--
+--[[ Sidescroller Framework V0.2.1 ]]--
 --[[ Made by Mitchell Adair ]]--
 
 SF = {}
@@ -28,5 +28,5 @@ function GameObject:CreateSpriteRenderer(sprite)
     return renderer
 end
 
---[[ Sidescroller Framework V0.2.0 ]]--
+--[[ Sidescroller Framework V0.2.1 ]]--
 --[[ Made by Mitchell Adair ]]--
