@@ -8,4 +8,7 @@ Here, you can find all the information you need on how to use SFramework as well
   - [CraftStudio Extensions](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/CraftStudio%20Extensions.md)
   - [Components](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/API/Components)
     - [SpriteRenderer](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/Components/SpriteRenderer.md)
+- [Contribute](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/Contribute)
+- [Tutorials](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/Tutorials)
+  - [Setting up a Simple Sprite with Animations](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/Tutorials/Setting%20Up%20a%20Simple%20Sprite%20with%20Animation.md)
 
