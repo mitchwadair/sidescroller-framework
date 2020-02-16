@@ -53,7 +53,7 @@ function Behavior:SetAnimation(animationAsset, numFrames)
     if numFrames == nil then
         error("missing required argument 'numFrames' in SetAnimation call")
         return
-    else if type(numFrames) ~= "number" then
+    elseif type(numFrames) ~= "number" then
         error("argument 'numFrames' in SetAnimation call should be a number")
         return
     end
@@ -106,6 +106,7 @@ function Behavior:StartAnimationPlayback(loop)
     end
     if self.currentAnimation == nil then
         error("no animation set for SpriteRenderer in GameObject "..self.gameObject:GetName())
+        return
     else
         self.gameObject.textRenderer:SetFont(self.currentAnimation)
         self.gameObject.textRenderer:SetText(" ")
