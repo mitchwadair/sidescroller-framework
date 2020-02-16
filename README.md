@@ -23,4 +23,4 @@ If there are any questions or need help with something, feel free to [open an is
 ## Contribute
 I welcome contributions to this project!
 
-It is not very intuitive to use CraftStudio with source control, so a tutorial on how you can make contributions can be found LINK_TODO
+It is not very intuitive to use CraftStudio with source control, so a tutorial on how you can make contributions can be found [here](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/Contribute).
