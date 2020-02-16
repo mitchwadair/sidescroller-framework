@@ -1,7 +1,7 @@
 # CraftStudio Extensions
 SFramework extends upon some of the capability built into CraftStudio.
 
-# Content
+# Contents
 - [GameObject](#gameobject)
   - [Accessors](#accessors)
   - [GetSpriteRenderer](#gameobjectgetspriterenderer)
