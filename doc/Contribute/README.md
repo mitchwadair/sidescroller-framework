@@ -15,6 +15,7 @@ Because SFramework is developed in CraftStudio, you modify it in CraftStudio as 
   - [Commit the Changes](#commit-the-changes)
 - [Pull Requests](#pull-requests)
   - [Drafting your Request](#drafting-your-request)
+- [Contributing In-server](#contributing-in-server)
 
 # Setup
 Set up your development environment.  Make sure you have [CraftStudio](https://sparklinlabs.itch.io/craftstudio) installed and have a [project ready](https://bitbucket.org/sparklinlabs/craftstud.io/wiki/Tutorials/Introduction) to import to.
@@ -98,3 +99,6 @@ Alternatively, you can do all of the above in [GitHub Desktop](https://desktop.g
 Once you've pushed your changes to your remote branch, you can create a [Pull Request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 ## Drafting your Request
 When creating a PR, ensure you make descriptive notes of your changes.  This way, I know what you did and why and how I can review and ensure that it works correctly.  Be detailed where necessary and explain code that may not be obvious as to what it does.  Also note any additional changes like new sample assets or changes to existing ones.
+
+# Contributing In-server
+If there is enough interest, I will set up a dedicated server for people to make changes to SFramework.  With this in place, contributions can be made there and commits and pushes can be handled by me.  For now, it should be done in a project of your own.
