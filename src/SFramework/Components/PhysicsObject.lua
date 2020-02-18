@@ -19,9 +19,12 @@ function Behavior:Awake()
     self.gameObject.halfWidth = self.width/2
     self.gameObject.halfHeight = self.height/2
     self.gameObject.bounciness = self.bounciness
+    self.gameObject.static = self.static
+    self.gameObject.inverseMass = 0
+    if not self.static and self.mass > 0 then self.gameObject.inverseMass = 1/self.mass end
     
     self.pos = self.gameObject.transform:GetPosition()
-    self.gameObject.velocity = Vector3:New(0, 0, 0)
+    self.gameObject.transform.velocity = Vector3:New(0, 0, 0)
 end
 
 function Behavior:Update()
@@ -29,15 +32,15 @@ function Behavior:Update()
     if not self.static then
         for i,v in ipairs(manager.physicsObjects) do
             if v ~= self.gameObject then
-                local colliding = manager.isColliding(self.gameObject, v)
-                if colliding then
-                    manager.resolveCollision(self.gameObject, v)
+                local colData = manager.getCollisionData(self.gameObject, v)
+                if colData ~= nil then
+                    manager.resolveCollision(self.gameObject, v, colData)
                 end
             end
         end
         
         self.pos = self.gameObject.transform:GetPosition()
-        self.gameObject.velocity.y = self.gameObject.velocity.y - (SF.physics.gravity/60)
-        self.gameObject.transform:SetPosition(self.pos + self.gameObject.velocity)
+        self.gameObject.transform.velocity.y = self.gameObject.transform.velocity.y - (SF.physics.gravity/60)
+        self.gameObject.transform:SetPosition(self.pos + self.gameObject.transform.velocity)
     end
 end

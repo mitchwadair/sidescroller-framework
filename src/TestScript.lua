@@ -3,14 +3,15 @@ function Behavior:Awake()
     --renderer:SetAnimation(CS.FindAsset("Sprites/Sample/Animations/Idle"), 6)
     --renderer:StartAnimationPlayback()
     
-    SF.physics.setGravity(1)
-    self.setVel = false
-    self.max = 0
+    SF.physics.setGravity(0)
+end
+
+function Behavior:Start()
+    self.gameObject.transform.velocity.x = -.1
+    self.gameObject.transform.velocity.y = .15
+    --CS.FindGameObject("Character 2").transform.velocity.x = -.05
 end
 
 function Behavior:Update()
-    if not self.setVel then
-        self.gameObject.velocity.x = .05
-        self.setVel = true
-    end
+    --print(self.gameObject.transform.velocity.y) --:GetPosition().y)
 end
