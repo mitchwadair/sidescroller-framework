@@ -15,6 +15,8 @@ function Behavior:Awake()
     end
     -- add self to physics manager
     SF.physics.manager:AddPhysicsObject(self.gameObject)
+    -- set GameObject accessor to self
+    self.gameObject.physics = self
     
     self.gameObject.halfWidth = self.width/2
     self.gameObject.halfHeight = self.height/2
@@ -22,6 +24,9 @@ function Behavior:Awake()
     self.gameObject.static = self.static
     self.gameObject.inverseMass = 0
     if not self.static and self.mass > 0 then self.gameObject.inverseMass = 1/self.mass end
+    
+    self.gameObject.colliderType = 'BOX'
+    if self.height == 0 then self.gameObject.colliderType = 'CIRCLE' end
     
     self.pos = self.gameObject.transform:GetPosition()
     self.gameObject.transform.velocity = Vector3:New(0, 0, 0)
@@ -32,9 +37,9 @@ function Behavior:Update()
     if not self.static then
         for i,v in ipairs(manager.physicsObjects) do
             if v ~= self.gameObject then
-                local colData = manager.getCollisionData(self.gameObject, v)
+                local colData = manager:GetCollisionData(self.gameObject, v)
                 if colData ~= nil then
-                    manager.resolveCollision(self.gameObject, v, colData)
+                    manager:ResolveCollision(self.gameObject, v, colData)
                 end
             end
         end

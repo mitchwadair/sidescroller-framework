@@ -7,7 +7,7 @@ function Behavior:Awake()
 end
 
 function Behavior:Start()
-    self.gameObject.transform.velocity.x = -.1
+    self.gameObject.transform.velocity.x = .1
     self.gameObject.transform.velocity.y = .15
     --CS.FindGameObject("Character 2").transform.velocity.x = -.05
 end
