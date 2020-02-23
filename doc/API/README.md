@@ -6,3 +6,4 @@ Here you'll find information about SFramework's API.
   - [GameObject](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/CS%20API%20Extensions/GameObject.md)
 - [Components](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/API/Components)
   - [SpriteRenderer](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/Components/SpriteRenderer.md)
+  - [Physics](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/Components/Physics.md)
