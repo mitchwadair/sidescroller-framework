@@ -1,5 +1,5 @@
 # SF Physics Manager API
-The SFramework Physics Manager handles storing references all physics objects in a scene as well as handling collision detection and resolution for Physics objects.
+The SFramework Physics Manager handles storing references all physics objects in a scene as well as handling collision detection and resolution for Physics objects.  While most developers will not likely ever need this API, as it is mainly used under the hood in the Physics component, it is still available to use if there is ever a case that someone may need it.
 
 # Contents
 - [SF Physics Manager](#sfphysicsmanager)
