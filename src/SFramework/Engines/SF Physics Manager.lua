@@ -11,7 +11,7 @@ end
 ]]--
 function Behavior:AddPhysicsObject(obj)
     if obj == nil then
-        error("missing required argument 'obj2' in AddPhysicsObject call")
+        error("missing required argument 'obj' in AddPhysicsObject call")
         return
     end
 
