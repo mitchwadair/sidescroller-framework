@@ -14,6 +14,10 @@ The framework is designed with CraftStudio's current APIs in mind.  For this rea
 SFramework makes sprites and sprite animation in CraftStudio easier than ever.  Use Font assets to create spritesheets and let SFramework do the rest!
 ![](https://i.imgur.com/G7hPae5.gif)
 
+### Simple Physics
+SFramework gives you simple 2D physics tools that will help you with collisions and improve character movement.  SFramework comes with both box and circle colliders which work in all directions and orientations!
+![](https://i.imgur.com/3mEzgz8.gif)
+
 
 ## Learn
 API documentation and tutorials can be found in the [doc](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc) folder of this repository.
