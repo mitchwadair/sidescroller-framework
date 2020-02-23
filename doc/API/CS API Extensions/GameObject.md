@@ -6,14 +6,15 @@ SFramework extends upon some of the capability built into CraftStudio.  The Game
   - [Accessors](#accessors)
   - [GetSpriteRenderer](#gameobjectgetspriterenderer)
   - [CreateSpriteRenderer](#gameobjectcreatespriterenderer)
-  - [AddPhysics](#gameobjectaddphysics)
   - [GetPhysics](#gameobjectgetphysics)
+  - [AddPhysics](#gameobjectaddphysics)
 
 # GameObject
 
 ## Accessors
 ```lua
 GameObject.spriteRenderer
+GameObject.physics
 ```
 
 ## GameObject:GetSpriteRenderer
