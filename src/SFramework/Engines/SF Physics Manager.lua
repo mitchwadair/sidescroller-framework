@@ -1,3 +1,5 @@
+--[[ Made by Mitchell Adair https://github.com/mitchwadair ]]--
+
 function Behavior:Awake()
     self.physicsObjects = {}
 end
@@ -23,103 +25,178 @@ function Behavior:RemovePhysicsObject(obj)
     end
 end
 
+function getCornersOfOBB(obj)
+    local corners = {}
+    local p = obj.transform:GetPosition()
+    local o = obj.transform:GetOrientation()
+    corners.topLeft = p + Vector3.Rotate(Vector3:New(p.x - obj.halfWidth, p.y + obj.halfHeight, 0) - p, o)
+    corners.topRight = p + Vector3.Rotate(Vector3:New(p.x + obj.halfWidth, p.y + obj.halfHeight, 0) - p, o)
+    corners.bottomLeft = p + Vector3.Rotate(Vector3:New(p.x - obj.halfWidth, p.y - obj.halfHeight, 0) - p, o)
+    corners.bottomRight = p + Vector3.Rotate(Vector3:New(p.x + obj.halfWidth, p.y - obj.halfHeight, 0) - p, o)
+    return corners
+end
+
+function getMinMax(c, a)
+    local minMax = {}
+    local min = math.huge
+    local max = -math.huge
+    for k,corner in pairs(c) do
+        local p = Vector3.Dot(corner, a)
+        if p < min then 
+            min = p
+            minMax.min = corner
+        end
+        if p > max then
+            max = p
+            minMax.max = corner
+        end
+    end
+    return minMax
+end
+
 --box vs box collision detection
 function boxVBox(obj1, obj2)
     local p1 = obj1.transform:GetPosition()
+    local o1 = obj1.transform:GetOrientation()
     local p2 = obj2.transform:GetPosition()
-    local uv1X = Vector3.Rotate(Vector3:Left(), obj1.transform:GetOrientation())
-    local uv1Y = Vector3.Rotate(Vector3:Up(), obj1.transform:GetOrientation())
-    local uv2X = Vector3.Rotate(Vector3:Left(), obj2.transform:GetOrientation())
-    local uv2Y = Vector3.Rotate(Vector3:Up(), obj2.transform:GetOrientation())
-    local r1X = uv1X*obj1.halfWidth
-    local r1Y = uv1Y*obj1.halfHeight
-    local r2X = uv2X*obj2.halfWidth
-    local r2Y = uv2Y*obj2.halfHeight
-    local t = p2 - p1
+    local o2 = obj2.transform:GetOrientation()
+    local obj1Corners = getCornersOfOBB(obj1)
+    local obj2Corners = getCornersOfOBB(obj2)
     
+    local axes = {}
+    table.insert(axes, Vector3.Rotate(Vector3:Left(), o1))
+    table.insert(axes, Vector3.Rotate(Vector3:Up(), o1))
+    local a = Vector3.Rotate(Vector3:Left(), o2)
+    if table.indexOf(axes, a) == 0 then table.insert(axes, a) end
+    a = Vector3.Rotate(Vector3:Up(), o2)
+    if table.indexOf(axes, a) == 0 then table.insert(axes, a) end
+    
+    local minDepth = math.huge
     local norm = nil
-    local minD = math.huge
-    
-    local depth = math.abs(Vector3.Dot(t, uv1X)) - (math.abs(Vector3.Dot(r1X, uv1X)) + math.abs(Vector3.Dot(r1Y, uv1X)) + math.abs(Vector3.Dot(r2X, uv1X)) + math.abs(Vector3.Dot(r2Y, uv1X)))
-    if depth > 0 then
-        return nil
-    else
-        minD = math.abs(depth)
-        if p1.x - p2.x < 0 then norm = uv1X else norm = -uv1X end
-    end
-    
-    depth = math.abs(Vector3.Dot(t, uv1Y)) - (math.abs(Vector3.Dot(r1X, uv1Y)) + math.abs(Vector3.Dot(r1Y, uv1Y)) + math.abs(Vector3.Dot(r2X, uv1Y)) + math.abs(Vector3.Dot(r2Y, uv1Y)))
-    if depth > 0 then
-        return nil
-    else
-        if math.abs(depth) < minD then
-            minD = math.abs(depth)
-            if p1.y - p2.y > 0 then norm = uv1Y else norm = -uv1Y end
+    for i,a in ipairs(axes) do
+        local minMax1 = getMinMax(obj1Corners, a)
+        local minMax2 = getMinMax(obj2Corners, a)
+        local min1Proj = Vector3.Dot(minMax1.min, a)
+        local max1Proj = Vector3.Dot(minMax1.max, a)
+        local min2Proj = Vector3.Dot(minMax2.min, a)
+        local max2Proj = Vector3.Dot(minMax2.max, a)
+        if max2Proj < min1Proj then
+            return nil
+        else
+            local d = math.abs(max2Proj - min1Proj)math.abs(max1Proj - min2Proj)
+            if d < minDepth then
+                minDepth = d
+                norm = a
+            end
+        end
+        if max1Proj < min2Proj then
+            return nil
+        else
+            local d = math.abs(max1Proj - min2Proj)
+            if d < minDepth then
+                minDepth = d
+                norm = -a
+            end
         end
     end
-    
-    depth = math.abs(Vector3.Dot(t, uv2X)) - (math.abs(Vector3.Dot(r1X, uv2X)) + math.abs(Vector3.Dot(r1Y, uv2X)) + math.abs(Vector3.Dot(r2X, uv2X)) + math.abs(Vector3.Dot(r2Y, uv2X)))
-    if depth > 0 then
-        return nil
-    else
-        if math.abs(depth) < minD then
-            minD = math.abs(depth)
-            if p1.x - p2.x < 0 then norm = uv2X else norm = -uv2X end
-        end
+    return {depth = minDepth, normal = norm}
+end
+
+function getCircleMinMax(c, a)
+    local minMax = {}
+    local pos = c.transform:GetPosition()
+    local side1 = a * c.halfWidth
+    local side2 = a * -c.halfWidth
+    local min = math.huge
+    local max = -math.huge
+    local p = Vector3.Dot(side1, a)
+    if p < min then
+        min = p
+        minMax.min = pos + side1
     end
-    
-    depth = math.abs(Vector3.Dot(t, uv2Y)) - (math.abs(Vector3.Dot(r1X, uv2Y)) + math.abs(Vector3.Dot(r1Y, uv2Y)) + math.abs(Vector3.Dot(r2X, uv2Y)) + math.abs(Vector3.Dot(r2Y, uv2Y)))
-    if depth > 0 then
-        return nil
-    else
-        if math.abs(depth) < minD then
-            minD = math.abs(depth)
-            if p1.y - p2.y > 0 then norm = uv2Y else norm = -uv2Y end
-        end
+    if p > max then
+        max = p
+        minMax.max = pos + side1
     end
-    return {normal = norm, depth = minD}
+    p = Vector3.Dot(side2, a)
+    if p < min then
+        min = p
+        minMax.min = pos + side2
+    end
+    if p > max then
+        max = p
+        minMax.max = pos + side2
+    end
+    return minMax
 end
 
 --box vs circle collision detection
 function boxVCircle(obj1, obj2)
-    local box = nil
-    local circle = nil
+    local circle = obj1
+    local box = obj2
     if obj1.colliderType == 'BOX' then
         box = obj1
         circle = obj2
-    else
-        box = obj2
-        circle = obj1
     end
     
-    local boxPos = box.transform:GetPosition()
     local cirPos = circle.transform:GetPosition()
-    local boxNormX = Vector3.Rotate(Vector3:Left(), box.transform:GetOrientation())
-    local boxNormY = Vector3.Rotate(Vector3:Up(), box.transform:GetOrientation())
-    local t = boxPos - cirPos
-    
+    local boxPos = box.transform:GetPosition()
+    local boxOrientation = box.transform:GetOrientation()
+    local t = cirPos - boxPos
+    local axes = {
+        Vector3.Rotate(Vector3:Left(), boxOrientation),
+        Vector3.Rotate(Vector3:Up(), boxOrientation),
+        t:Normalized()
+    }
+    local boxCorners = getCornersOfOBB(box)
+    local minDepth = math.huge
     local norm = nil
-    local minD = math.huge
-    
-    local depth = math.abs(Vector3.Dot(t, boxNormX)) - (box.halfWidth + circle.halfWidth)
-    if depth > 0 then
-        return nil
-    else
-        minD = math.abs(depth)
-        if circle.transform.velocity.x > 0 then norm = boxNormX else norm = -boxNormX end
-    end
-    
-    depth = math.abs(Vector3.Dot(t, boxNormY)) - (box.halfHeight + circle.halfWidth)
-    if depth > 0 then
-        return nil
-    else
-        if math.abs(depth) < minD then
-            minD = math.abs(depth)
-            if circle.transform.velocity.y < 0 then norm = boxNormY else norm = -boxNormY end
+    for i,a in ipairs(axes) do
+        local minMax1 = getMinMax(boxCorners, a)
+        local minMax2 = getCircleMinMax(circle, a)
+        local min1Proj = Vector3.Dot(minMax1.min, a)
+        local max1Proj = Vector3.Dot(minMax1.max, a)
+        local min2Proj = Vector3.Dot(minMax2.min, a)
+        local max2Proj = Vector3.Dot(minMax2.max, a)
+        if max2Proj < min1Proj then
+            return nil
+        else
+            local d = math.abs(max2Proj - min1Proj)math.abs(max1Proj - min2Proj)
+            if d < minDepth then
+                minDepth = d
+                norm = a
+            end
+        end
+        if max1Proj < min2Proj then
+            return nil
+        else
+            local d = math.abs(max1Proj - min2Proj)
+            if d < minDepth then
+                minDepth = d
+                norm = -a
+            end
         end
     end
-    
-    return {normal = norm, depth = minD}
+    if obj1.colliderType == 'CIRCLE' then
+        norm = -norm
+    end
+    return {depth = minDepth, normal = norm}
+end
+
+function getSqDist(v1, v2)
+    return ((v2.x - v1.x) * (v2.x - v1.x)) + ((v2.y - v1.y) * (v2.y - v1.y))
+end
+
+-- circle vs circle collision detection
+function circleVCircle(obj1, obj2)
+    local p1 = obj1.transform:GetPosition()
+    local p2 = obj2.transform:GetPosition()
+    local dist = getSqDist(p1, p2)
+    local depth = dist - (obj1.halfWidth + obj2.halfWidth)
+    if depth < 0 then
+        return {depth = depth, normal = p1 - p2}
+    end
+    return nil
 end
 
 --[[
@@ -138,7 +215,6 @@ function Behavior:GetCollisionData(obj1, obj2)
             return circleVCircle(obj1, obj2)
         end
     else
-        
         return boxVCircle(obj1, obj2)
     end
 end
@@ -154,7 +230,7 @@ function Behavior:ResolveCollision(obj1, obj2, data)
     local relativeVelocity = obj2.transform.velocity - obj1.transform.velocity
     local velProjected = Vector3.Dot(relativeVelocity, data.normal)
     
-    if velProjected < 0 then return end
+    if velProjected < -.0005 then return end
     
     local restitution = obj1.bounciness * obj2.bounciness
     local impulseMagnitude = (1+restitution) * velProjected

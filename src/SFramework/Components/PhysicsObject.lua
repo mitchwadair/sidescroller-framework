@@ -3,7 +3,7 @@ width number 1
 height number 1
 mass number 1
 static boolean False
-bounciness number 0.5
+bounciness number 0
 /PublicProperties]]
 --[[ Made by Mitchell Adair https://github.com/mitchwadair ]]--
 
