@@ -7,9 +7,7 @@ function Behavior:Awake()
 end
 
 function Behavior:Start()
-    self.gameObject.transform.velocity.x = .1
-    self.gameObject.transform.velocity.y = .15
-    --CS.FindGameObject("Character 2").transform.velocity.x = -.05
+    self.gameObject.physics:ApplyImpulse(Vector3:New(.1, .15, 0))
 end
 
 function Behavior:Update()

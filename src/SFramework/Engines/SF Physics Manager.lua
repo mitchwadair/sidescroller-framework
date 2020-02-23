@@ -10,6 +10,11 @@ end
     @param obj (required) the PhysicsObject to add
 ]]--
 function Behavior:AddPhysicsObject(obj)
+    if obj == nil then
+        error("missing required argument 'obj2' in AddPhysicsObject call")
+        return
+    end
+
     table.insert(self.physicsObjects, obj)
 end
 
@@ -19,6 +24,11 @@ end
     @param obj (required) the PhysicsObject to remove
 ]]--
 function Behavior:RemovePhysicsObject(obj)
+    if obj == nil then
+        error("missing required argument 'obj' in RemovePhysicsObject call")
+        return
+    end
+    
     local i = table.indexOf(self.physicsObjects, obj)
     if i > 0 then
         table.remove(self.physicsObjects, i)
@@ -29,10 +39,10 @@ function getCornersOfOBB(obj)
     local corners = {}
     local p = obj.transform:GetPosition()
     local o = obj.transform:GetOrientation()
-    corners.topLeft = p + Vector3.Rotate(Vector3:New(p.x - obj.halfWidth, p.y + obj.halfHeight, 0) - p, o)
-    corners.topRight = p + Vector3.Rotate(Vector3:New(p.x + obj.halfWidth, p.y + obj.halfHeight, 0) - p, o)
-    corners.bottomLeft = p + Vector3.Rotate(Vector3:New(p.x - obj.halfWidth, p.y - obj.halfHeight, 0) - p, o)
-    corners.bottomRight = p + Vector3.Rotate(Vector3:New(p.x + obj.halfWidth, p.y - obj.halfHeight, 0) - p, o)
+    corners.topLeft = p + Vector3.Rotate(Vector3:New(p.x - obj.physics.halfWidth, p.y + obj.physics.halfHeight, 0) - p, o)
+    corners.topRight = p + Vector3.Rotate(Vector3:New(p.x + obj.physics.halfWidth, p.y + obj.physics.halfHeight, 0) - p, o)
+    corners.bottomLeft = p + Vector3.Rotate(Vector3:New(p.x - obj.physics.halfWidth, p.y - obj.physics.halfHeight, 0) - p, o)
+    corners.bottomRight = p + Vector3.Rotate(Vector3:New(p.x + obj.physics.halfWidth, p.y - obj.physics.halfHeight, 0) - p, o)
     return corners
 end
 
@@ -105,8 +115,8 @@ end
 function getCircleMinMax(c, a)
     local minMax = {}
     local pos = c.transform:GetPosition()
-    local side1 = a * c.halfWidth
-    local side2 = a * -c.halfWidth
+    local side1 = a * c.physics.halfWidth
+    local side2 = a * -c.physics.halfWidth
     local min = math.huge
     local max = -math.huge
     local p = Vector3.Dot(side1, a)
@@ -134,7 +144,7 @@ end
 function boxVCircle(obj1, obj2)
     local circle = obj1
     local box = obj2
-    if obj1.colliderType == 'BOX' then
+    if obj1.physics.colliderType == 'BOX' then
         box = obj1
         circle = obj2
     end
@@ -177,7 +187,7 @@ function boxVCircle(obj1, obj2)
             end
         end
     end
-    if obj1.colliderType == 'CIRCLE' then
+    if obj1.physics.colliderType == 'CIRCLE' then
         norm = -norm
     end
     return {depth = minDepth, normal = norm}
@@ -192,7 +202,7 @@ function circleVCircle(obj1, obj2)
     local p1 = obj1.transform:GetPosition()
     local p2 = obj2.transform:GetPosition()
     local dist = getSqDist(p1, p2)
-    local depth = dist - (obj1.halfWidth + obj2.halfWidth)
+    local depth = dist - (obj1.physics.halfWidth + obj2.physics.halfWidth)
     if depth < 0 then
         return {depth = depth, normal = p1 - p2}
     end
@@ -208,8 +218,16 @@ end
     @return a table containing the depth and normal of the collision, nil if no collision
 ]]--
 function Behavior:GetCollisionData(obj1, obj2)
-    if obj1.colliderType == obj2.colliderType then
-        if obj1.colliderType == 'BOX' then
+    if obj1 == nil then
+        error("missing required argument 'obj1' in GetCollisionData call")
+        return
+    elseif obj2 == nil then
+        error("missing required argument 'obj2' in GetCollisionData call")
+        return
+    end
+    
+    if obj1.physics.colliderType == obj2.physics.colliderType then
+        if obj1.physics.colliderType == 'BOX' then
             return boxVBox(obj1, obj2)
         else
             return circleVCircle(obj1, obj2)
@@ -227,21 +245,32 @@ end
     @param data (data) the collision data
 ]]--
 function Behavior:ResolveCollision(obj1, obj2, data)
-    local relativeVelocity = obj2.transform.velocity - obj1.transform.velocity
+    if obj1 == nil then
+        error("missing required argument 'obj1' in ResolveCollision call")
+        return
+    elseif obj2 == nil then
+        error("missing required argument 'obj2' in ResolveCollision call")
+        return
+    elseif data == nil then
+        error("missing required argument 'data' in ResolveCollision call")
+        return
+    end
+
+    local relativeVelocity = obj2.physics.velocity - obj1.physics.velocity
     local velProjected = Vector3.Dot(relativeVelocity, data.normal)
     
     if velProjected < -.0005 then return end
     
-    local restitution = obj1.bounciness * obj2.bounciness
+    local restitution = obj1.physics.bounciness * obj2.physics.bounciness
     local impulseMagnitude = (1+restitution) * velProjected
-    impulseMagnitude = impulseMagnitude / (obj1.inverseMass + obj2.inverseMass)
+    impulseMagnitude = impulseMagnitude / (obj1.physics.inverseMass + obj2.physics.inverseMass)
     
     local impulse = data.normal * impulseMagnitude
     impulse.y = impulse.y + (SF.physics.gravity/60)
-    obj1.transform.velocity = obj1.transform.velocity + (obj1.inverseMass*impulse)
-    if math.abs(obj1.transform.velocity.y) <= .05 * SF.physics.gravity then obj1.transform.velocity.y = 0 end
-    obj2.transform.velocity = obj2.transform.velocity - (obj2.inverseMass*impulse)
-    if math.abs(obj2.transform.velocity.y) <= .05 * SF.physics.gravity then obj2.transform.velocity.y = 0 end
+    obj1.physics.velocity = obj1.physics.velocity + (obj1.physics.inverseMass*impulse)
+    if math.abs(obj1.physics.velocity.y) <= .05 * SF.physics.gravity then obj1.physics.velocity.y = 0 end
+    obj2.physics.velocity = obj2.physics.velocity - (obj2.physics.inverseMass*impulse)
+    if math.abs(obj2.physics.velocity.y) <= .05 * SF.physics.gravity then obj2.physics.velocity.y = 0 end
     
     obj1.transform:SetPosition(obj1.transform:GetPosition() + (data.normal * data.depth))
     obj1.transform:SetPosition(obj1.transform:GetPosition() + Vector3:New(0, .0002, 0))
