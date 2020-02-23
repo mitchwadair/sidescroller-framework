@@ -9,6 +9,6 @@ Here you'll find information about SFramework's API.
   - [Physics](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/Components/Physics.md)
 - [Engines](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/API/Engines)
   - [SF Physics Manager](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/Engines/SF%20Physics%20Manager.md)
-- [LUA Library Extensions]()
+- [LUA Library Extensions](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/API/LUA%20Library%20Extensions)
   - [math](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/LUA%20Library%20Extensions/math.md)
   - [table](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/LUA%20Library%20Extensions/table.md)
