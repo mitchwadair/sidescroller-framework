@@ -86,7 +86,6 @@ end
 
 --[[ EXTEND MATH ]]--
 function math.sign(value)
-    local ret = 1
     if value < 0 then return -1 end
-    return ret
+    return 1
 end
