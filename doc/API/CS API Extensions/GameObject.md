@@ -1,5 +1,5 @@
-# CraftStudio Extensions
-SFramework extends upon some of the capability built into CraftStudio.
+# GameObject
+SFramework extends upon some of the capability built into CraftStudio.  The GameObject has gained a few new functions.
 
 # Contents
 - [GameObject](#gameobject)
