@@ -5,7 +5,8 @@ Here, you can find all the information you need on how to use SFramework as well
 
 # Contents
 - [API](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/API)
-  - [CraftStudio Extensions](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/CraftStudio%20Extensions.md)
+  - [CS API Extensions](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/API/CS%20API%20Extensions)
+    - [GameObject](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/CS%20API%20Extensions/GameObject.md)
   - [Components](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/API/Components)
     - [SpriteRenderer](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/Components/SpriteRenderer.md)
 - [Contribute](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/Contribute)
