@@ -1,5 +1,4 @@
---[[ Sidescroller Framework V0.2.1 ]]--
---[[ Made by Mitchell Adair ]]--
+--[[ Made by Mitchell Adair https://github.com/mitchwadair ]]--
 
 function Behavior:Awake()
     --set defaults
@@ -173,6 +172,3 @@ function Behavior:Update()
         end
     end
 end
-
---[[ Sidescroller Framework V0.2.1 ]]--
---[[ Made by Mitchell Adair ]]--
