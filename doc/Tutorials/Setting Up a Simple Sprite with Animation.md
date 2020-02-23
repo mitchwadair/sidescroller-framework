@@ -107,7 +107,7 @@ Open the script we just created.  First thing we need to do is create a SpriteRe
 
 ![](https://i.imgur.com/DSTPmDY.png)
 
-![](https://i.imgur.com/p2UiSV8.png)
+![](https://i.imgur.com/A7YTeHC.png)
 
 We can now create a reference to this component in the `Awake()` behavior function of our new script by using the GameObject's [SpriteRenderer accessor](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/CraftStudio%20Extensions.md#accessors)
 ```cs
