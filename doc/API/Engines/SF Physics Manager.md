@@ -35,7 +35,7 @@ SF.physics.manager:RemovePhysicsObject(self.gameObject)
 ```
 
 ## SFPhysicsManager:GetCollisionData
-Returns a table with collision depth and normal for the two given objects or nil if no collision
+Returns a table with collision depth and normal for the two given objects or `nil` if no collision
 ### Arguments
 - `obj1` - `GameObject` (required) the first GameObject to check
 - `obj2` - `GameObject` (required) the second GameObject to check
