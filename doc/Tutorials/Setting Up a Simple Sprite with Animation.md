@@ -110,25 +110,25 @@ Open the script we just created.  First thing we need to do is create a SpriteRe
 ![](https://i.imgur.com/p2UiSV8.png)
 
 We can now create a reference to this component in the `Awake()` behavior function of our new script by using the GameObject's [SpriteRenderer accessor](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/CraftStudio%20Extensions.md#accessors)
-```cs
+```lua
 local mySpriteRenderer = self.gameObject.spriteRenderer
 ```
 or, alternatively using GameObject's [CreateSpriteRenderer](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/CraftStudio%20Extensions.md#gameobjectcreatespriterenderer) function
-```cs
+```lua
 local mySpriteRenderer = self.gameObject:GetSpriteRenderer()
 ```
 If we want to create our SpriteRenderer programmatically, it is a simple line of code
-```cs
+```lua
 local mySpriteRenderer = self.gameObject:CreateSpriteRenderer()
 ```
 ### Set Animation
 Now that we have a reference to our SpriteRenderer, we need to set our animation.  We can do this using the SpriteRenderer's [SetAnimation](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/Components/SpriteRenderer.md#spriterenderersetanimation) function.  Remember the animation Font we just created?  We'll reference that asset as the first argument to our function call.  We also need to keep in mind the number of frames our animation consists of.  In my case, it is 6.  This will be our second function argument.
-```cs
+```lua
 mySpriteRenderer:SetAnimation(CS.FindAsset("Sprites/Sample/Animations/Idle"), 6)
 ```
 ### Start Animation
 The last step is to start playing the animation.  This is done using SpriteRenderer's [StartAnimationPlayback](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/Components/SpriteRenderer.md#spriterendererstartanimationplayback) function.  This function has an optional argument, `loop`.  If we want our animation to loop we can pass in `true` or omit it.  If not, we can pass `false`.  In my case, I added an idle animation so I will let it loop.
-```cs
+```lua
 mySpriteRenderer:StartAnimationPlayback()
 ```
 ### Full Code
@@ -137,7 +137,7 @@ And were done!  If you start the game using your scene, you will see your sprite
 ![](https://i.imgur.com/ANeU4ur.gif)
 
 The full code that we've written in our new script should look like this:
-```cs
+```lua
 function Behavior:Awake()
     local mySpriteRenderer = self.gameObject:CreateSpriteRenderer()
     mySpriteRenderer:SetAnimation(CS.FindAsset("Sprites/Sample/Animations/Idle"), 6)

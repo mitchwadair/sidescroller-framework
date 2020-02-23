@@ -20,7 +20,7 @@ The SpriteRenderer object handles display and animation of sprites.  In SFramewo
 ## SpriteRenderer:GetSprite
 Returns a reference to the sprite asset being used.  Remember, a "Sprite" is actually a Font
 ### Example
-```cs
+```lua
 local sprite = self.gameObject.spriteRenderer:GetSprite()
 ```
 ## SpriteRenderer:SetSprite
@@ -28,14 +28,14 @@ Sets the SpriteRenderer's sprite to the given "Sprite" (Font) asset
 ### Arguments
 - `sprite` - `CS Asset` (required) the Font asset for the desired sprite
 ### Example
-```cs
+```lua
 self.gameObject.spriteRenderer:SetSprite(CS.FindAsset("Sprites/Sample/SampleSprite", "Font"))
 ```
 
 ## SpriteRenderer:GetAnimation
 Returns the current animation of the SpriteRenderer
 ### Example
-```cs
+```lua
 local currentAnimation = self.gameObject.spriteRenderer:GetAnimation()
 ```
 
@@ -45,7 +45,7 @@ Sets the animation of the SpriteRenderer to the given spritesheet Font asset
 - `animationAsset` - `CS Asset` (required) the spritesheet to assign
 - `numFrames` - `number` (required) the number of frames in the animation
 ### Example
-```cs
+```lua
 self.gameObject.spriteRenderer:SetAnimation(CS.FindAsset("Sprites/Sample/Animations/Idle", "Font"))
 ```
 
@@ -54,14 +54,14 @@ Sets the animation's frame duration of the SpriteRenderer to the given number of
 ### Arguments
 - `ticks` - `number` (required) the number of game ticks per frame of the animation
 ### Example
-```cs
+```lua
 self.gameObject.spriteRenderer:SetAnimationFrameDuration(30)
 ```
 
 ## SpriteRenderer:GetAnimationDuration
 Gets the duration of the current animation in seconds
 ### Example
-```cs
+```lua
 local animationLength = self.gameObject.spriteRenderer:GetAnimationDuration()
 ```
 
@@ -70,28 +70,28 @@ Starts playback of the current animation
 ### Arguments
 - `loop` - `bool` (optional) whether or not to loop the animation.  Default: `true`
 ### Example
-```cs
+```lua
 self.gameObject.spriteRenderer:StartAnimationPlayback(true)
 ```
 
 ## SpriteRenderer:StopAnimationPlayback
 Stops playback of current animation
 ### Example
-```cs
+```lua
 self.gameObject.spriteRenderer:StopAnimationPlayback()
 ```
 
 ## SpriteRenderer:IsAnimationPlaying
 Returns whether or not an animation is currently playing
 ### Example
-```cs
+```lua
 local isAnimationPlaying = self.gameObject.spriteRenderer:IsAnimationPlaying()
 ```
 
 ## SpriteRenderer:GetOpacity
 Returns the current opacity of the SpriteRenderer
 ### Example
-```cs
+```lua
 local spriteOpacity = self.gameObject.spriteRenderer:GetOpacity()
 ```
 
@@ -100,6 +100,6 @@ Sets the opacity of the SpriteRenderer to the given value, clamping between 0 an
 ### Arguments
 - `opacity` - `number` (required) a number between 0 and 1 to apply to the opacity
 ### Example
-```cs
+```lua
 self.gameObject.spriteRenderer:SetOpacity(.5)
 ```
