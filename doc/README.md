@@ -10,5 +10,5 @@ Here, you can find all the information you need on how to use SFramework as well
     - [SpriteRenderer](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/Components/SpriteRenderer.md)
 - [Contribute](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/Contribute)
 - [Tutorials](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/Tutorials)
-  - [Setting up a Simple Sprite with Animations](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/Tutorials/Setting%20Up%20a%20Simple%20Sprite%20with%20Animation.md)
+  - [Setting up a Simple Sprite with Animations](Setting%20Up%20a%20Simple%20Sprite%20with%20Animation.md)
 
