@@ -36,6 +36,10 @@ function Behavior:RemovePhysicsObject(obj)
 end
 
 function getCornersOfOBB(obj)
+    if obj.physics.colliderType == 'TRIANGLE' then
+        return getCornersOfTriangle(obj)
+    end
+    
     local corners = {}
     local p = obj.transform:GetPosition()
     local o = obj.transform:GetOrientation()
@@ -44,6 +48,29 @@ function getCornersOfOBB(obj)
     corners.bottomLeft = p + Vector3.Rotate(Vector3:New(p.x - obj.physics.halfWidth, p.y - obj.physics.halfHeight, 0) - p, o)
     corners.bottomRight = p + Vector3.Rotate(Vector3:New(p.x + obj.physics.halfWidth, p.y - obj.physics.halfHeight, 0) - p, o)
     return corners
+end
+
+function getCornersOfTriangle(obj)
+    local corners = {}
+    local p = obj.transform:GetPosition()
+    local o = obj.transform:GetOrientation()
+    corners.topRight = p + Vector3.Rotate(Vector3:New(p.x + obj.physics.halfWidth, p.y + obj.physics.halfHeight, 0) - p, o)
+    corners.bottomLeft = p + Vector3.Rotate(Vector3:New(p.x - obj.physics.halfWidth, p.y - obj.physics.halfHeight, 0) - p, o)
+    corners.bottomRight = p + Vector3.Rotate(Vector3:New(p.x + obj.physics.halfWidth, p.y - obj.physics.halfHeight, 0) - p, o)
+    return corners
+end
+
+function getAxesOfOBB(c)
+    local axes = {}
+    axes[1] = (c.bottomRight - c.topRight):Normalized()
+    axes[2] = (c.bottomRight - c.bottomLeft):Normalized()
+    if table.length(c) == 3 then
+        axes[3] = Vector3.Cross((c.bottomLeft - c.topRight):Normalized(), -Vector3:Forward())
+    else
+        axes[3] = (c.topLeft - c.bottomLeft):Normalized()
+        axes[4] = (c.topLeft - c.topRight):Normalized()
+    end
+    return axes
 end
 
 function getMinMax(c, a)
@@ -65,21 +92,16 @@ function getMinMax(c, a)
 end
 
 --box vs box collision detection
-function boxVBox(obj1, obj2)
-    local p1 = obj1.transform:GetPosition()
-    local o1 = obj1.transform:GetOrientation()
-    local p2 = obj2.transform:GetPosition()
-    local o2 = obj2.transform:GetOrientation()
+function OBBvOBB(obj1, obj2)
     local obj1Corners = getCornersOfOBB(obj1)
     local obj2Corners = getCornersOfOBB(obj2)
     
-    local axes = {}
-    table.insert(axes, Vector3.Rotate(Vector3:Left(), o1))
-    table.insert(axes, Vector3.Rotate(Vector3:Up(), o1))
-    local a = Vector3.Rotate(Vector3:Left(), o2)
-    if table.indexOf(axes, a) == 0 then table.insert(axes, a) end
-    a = Vector3.Rotate(Vector3:Up(), o2)
-    if table.indexOf(axes, a) == 0 then table.insert(axes, a) end
+    local axes = getAxesOfOBB(obj1Corners)
+    for i,axis in ipairs(getAxesOfOBB(obj2Corners)) do
+        if table.indexOf(axes, axis) == 0 then
+            table.insert(axes, axis)
+        end
+    end
     
     local minDepth = math.huge
     local norm = nil
@@ -93,19 +115,10 @@ function boxVBox(obj1, obj2)
         if max2Proj < min1Proj then
             return nil
         else
-            local d = math.abs(max2Proj - min1Proj)math.abs(max1Proj - min2Proj)
+            local d = math.abs(max2Proj - min1Proj)
             if d < minDepth then
                 minDepth = d
                 norm = a
-            end
-        end
-        if max1Proj < min2Proj then
-            return nil
-        else
-            local d = math.abs(max1Proj - min2Proj)
-            if d < minDepth then
-                minDepth = d
-                norm = -a
             end
         end
     end
@@ -141,24 +154,21 @@ function getCircleMinMax(c, a)
 end
 
 --box vs circle collision detection
-function boxVCircle(obj1, obj2)
+function OBBvCircle(obj1, obj2)
     local circle = obj1
     local box = obj2
-    if obj1.physics.colliderType == 'BOX' then
+    if obj1.physics.colliderType == 'BOX' or obj1.physics.colliderType == 'TRIANGLE' then
         box = obj1
         circle = obj2
     end
     
     local cirPos = circle.transform:GetPosition()
     local boxPos = box.transform:GetPosition()
-    local boxOrientation = box.transform:GetOrientation()
     local t = cirPos - boxPos
-    local axes = {
-        Vector3.Rotate(Vector3:Left(), boxOrientation),
-        Vector3.Rotate(Vector3:Up(), boxOrientation),
-        t:Normalized()
-    }
     local boxCorners = getCornersOfOBB(box)
+    local axes = getAxesOfOBB(boxCorners)
+    table.insert(axes, t:Normalized())
+    
     local minDepth = math.huge
     local norm = nil
     for i,a in ipairs(axes) do
@@ -171,7 +181,7 @@ function boxVCircle(obj1, obj2)
         if max2Proj < min1Proj then
             return nil
         else
-            local d = math.abs(max2Proj - min1Proj)math.abs(max1Proj - min2Proj)
+            local d = math.abs(max2Proj - min1Proj)
             if d < minDepth then
                 minDepth = d
                 norm = a
@@ -226,14 +236,13 @@ function Behavior:GetCollisionData(obj1, obj2)
         return
     end
     
-    if obj1.physics.colliderType == obj2.physics.colliderType then
-        if obj1.physics.colliderType == 'BOX' then
-            return boxVBox(obj1, obj2)
-        else
+    if (obj1.physics.colliderType == 'BOX' or obj1.physics.colliderType == 'TRIANGLE') and (obj2.physics.colliderType == 'BOX' or obj2.physics.colliderType == 'TRIANGLE') then
+        return OBBvOBB(obj1, obj2)
+    else
+        if obj1.physics.colliderType == obj2.physics.colliderType then
             return circleVCircle(obj1, obj2)
         end
-    else
-        return boxVCircle(obj1, obj2)
+        return OBBvCircle(obj1, obj2)
     end
 end
 
@@ -266,7 +275,6 @@ function Behavior:ResolveCollision(obj1, obj2, data)
     impulseMagnitude = impulseMagnitude / (obj1.physics.inverseMass + obj2.physics.inverseMass)
     
     local impulse = data.normal * impulseMagnitude
-    impulse.y = impulse.y + (SF.physics.gravity/60)
     obj1.physics.velocity = obj1.physics.velocity + (obj1.physics.inverseMass*impulse)
     if math.abs(obj1.physics.velocity.y) <= .05 * SF.physics.gravity then obj1.physics.velocity.y = 0 end
     obj2.physics.velocity = obj2.physics.velocity - (obj2.physics.inverseMass*impulse)

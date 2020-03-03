@@ -4,6 +4,7 @@ height number 1
 mass number 1
 static boolean False
 bounciness number 0
+colliderType string "BOX"
 /PublicProperties]]
 --[[ Made by Mitchell Adair https://github.com/mitchwadair ]]--
 
@@ -23,8 +24,7 @@ function Behavior:Awake()
     self.inverseMass = 0
     if not self.static and self.mass > 0 then self.inverseMass = 1/self.mass end
     
-    self.colliderType = 'BOX'
-    if self.height == 0 then self.colliderType = 'CIRCLE' end
+    self.colliderType = string.upper(self.colliderType) --make it more robust
     
     self.velocity = Vector3:New(0, 0, 0)
 end
@@ -179,6 +179,34 @@ function Behavior:SetStatic(static)
     end
     
     self.static = static
+end
+
+--[[
+    Returns the physics object's collider type
+    
+    @return the collider type of the physics object
+]]--
+function Behavior:GetColliderType()
+    return self.colliderType
+end
+
+--[[
+    Sets the physics object's collider type to the one given
+    
+    @param type (required) BOX, CIRCLE, or TRIANGLE
+]]--
+function Behavior:SetColliderType(type)
+    if type == nil then
+        error("missing required argument 'type' in SetColliderType call")
+        return
+    end
+    local upperCase = string.upper(type)
+    if upperCase ~= 'CIRCLE' and upperCase ~= 'BOX' and upperCase ~= 'TRIANGLE' then
+        error("argument 'type' in SetColliderType must be 'BOX', 'CIRCLE', or 'TRIANGLE'")
+        return
+    end
+    
+    self.colliderType = upperCase
 end
 
 function Behavior:Update()
