@@ -48,6 +48,7 @@ local myPhysics = self.gameObject:GetPhysics()
 ## GameObject:AddPhysics
 Adds a Physics component with default values to the object and returns a reference
 ### Arguments
+- `colliderType` - `string` (optional) the colliderType of the collider - defaults to `BOX`
 - `width` - `number` (optional) the width of the collider - defaults to `1`
 - `height` - `number` (optional) the height of the collider - defaults to `1`
 - `mass` - `number` (optional) the mass of the object - defaults to `1`
@@ -60,5 +61,5 @@ local myDefaultPhysics = self.gameObject:AddPhysics()
 ```
 ### Adding with Custom Values
 ```lua
-local myCustomPhysics self.gameObject:AddPhysics(1, 10, 1, false, .5)
+local myCustomPhysics self.gameObject:AddPhysics('BOX', 1, 10, 1, false, .5)
 ```
