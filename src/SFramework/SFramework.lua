@@ -13,6 +13,10 @@ SF.physics.gravity = 1 --the gravity in units/second
     @param the gravity in units per second
 ]]--
 SF.physics.setGravity = function(g)
+    if g == nil then
+        error("missing required argument 'g' in setGravity call")
+        return
+    end
     SF.physics.gravity = g
 end
 

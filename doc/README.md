@@ -5,10 +5,19 @@ Here, you can find all the information you need on how to use SFramework as well
 
 # Contents
 - [API](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/API)
-  - [CraftStudio Extensions](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/CraftStudio%20Extensions.md)
+  - [SFramework](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/SFramework.md)
+  - [CS API Extensions](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/API/CS%20API%20Extensions)
+    - [GameObject](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/CS%20API%20Extensions/GameObject.md)
   - [Components](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/API/Components)
     - [SpriteRenderer](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/Components/SpriteRenderer.md)
+    - [Physics](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/Components/Physics.md)
+  - [Engines](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/API/Engines)
+    - [SF Physics Manager](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/Engines/SF%20Physics%20Manager.md)
+  - [LUA Library Extensions](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/API/LUA%20Library%20Extensions)
+    - [math](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/LUA%20Library%20Extensions/math.md)
+    - [table](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/API/LUA%20Library%20Extensions/table.md)
 - [Contribute](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/Contribute)
 - [Tutorials](https://github.com/mitchwadair/sidescroller-framework/tree/master/doc/Tutorials)
-  - [Setting up a Simple Sprite with Animations](Setting%20Up%20a%20Simple%20Sprite%20with%20Animation.md)
+  - [Setting up a Simple Sprite with Animations](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/Tutorials/Setting%20Up%20a%20Simple%20Sprite%20with%20Animation.md)
+  - [Adding Physics to a Game Object](https://github.com/mitchwadair/sidescroller-framework/blob/master/doc/Tutorials/Adding%20Physics%20to%20a%20Game%20Object.md)
 
