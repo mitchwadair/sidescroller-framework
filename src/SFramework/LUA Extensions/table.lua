@@ -16,3 +16,18 @@ function table.indexOf(t, val)
     end
     return 0
 end
+
+--[[
+    Returns the length of the given table
+    
+    @param t (required) the table to check
+    
+    @return the length of the table
+]]--
+function table.length(t)
+    local count = 0
+    for k,v in pairs(t) do
+        count = count + 1
+    end
+    return count
+end
