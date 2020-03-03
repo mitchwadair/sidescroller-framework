@@ -28,6 +28,7 @@ end
 --[[
     Adds a physics component to the game object
     
+    @param colliderType (optional) the collider type of the physics object
     @param width (optional) the width of the physics object (or diameter of circle)
     @param height (optional) the height of the physics object (or 0 if circle)
     @param mass (optional) the mass of the physics object
@@ -36,8 +37,9 @@ end
     
     @return the PhysicsObject behavior
 ]]--
-function GameObject:AddPhysics(width, height, mass, static, bounciness)
+function GameObject:AddPhysics(colliderType, width, height, mass, static, bounciness)
     local defaults = {}
+    if colliderType ~= nil then defaults.colliderType = colliderType else defaults.colliderType = 'BOX' end
     if width ~= nil then defaults.width = width else defaults.width = 1 end
     if height ~= nil then defaults.height = height else defaults.height = 1 end
     if mass ~= nil then defaults.mass = mass else defaults.mass = 1 end
