@@ -16,6 +16,8 @@ Physics component handles object physics.
   - [SetVelocity](#physicssetvelocity)
   - [IsStatic](#physicsisstatic)
   - [SetStatic](#physicssetstatic)
+  - [GetColliderType](#physicsgetcollidertype)
+  - [SetColliderType](#physicssetcollidertype)
   - [ApplyImpulse](#physicsapplyimpulse)
   
 #Physics
@@ -28,6 +30,7 @@ Physics.height
 Physics.bounciness
 Physics.velocity
 Physics.static
+Physics.colliderType
 ```
 
 ## Physics:GetMass
@@ -124,6 +127,22 @@ Sets whether or not the Physics object is static
 ### Example
 ```lua
 self.gameObject.physics:SetStatic(false)
+```
+
+## Physics:GetColliderType
+Returns the collider type of the object
+### Example
+```lua
+local myCollider = self.gameObject.physics:GetColliderType()
+```
+
+## Physics:SetColliderType
+Sets the velocity of the Physics object to the given vector
+### Arguments
+- `type` - `string` (required) the collider type to set to
+### Example
+```lua
+self.gameObject.physics:SetColliderType('CIRCLE')
 ```
 
 ## Physics:ApplyImpulse

@@ -4,6 +4,7 @@ SFramework expands upon some of the built-in LUA table library functionality.  H
 # Contents
 - [table](#table)
   - [indexOf](#tableindexof)
+  - [length](#tablelength)
   
 # table
 
@@ -16,4 +17,14 @@ Returns the index of the given value in the given table, or `0` if not found
 ```lua
 local myTable = {2, 5, 4, 7, 1}
 local index = table.indexOf(myTable, 4) --should return 3
+```
+
+## table.length
+Returns the length of the given table
+### Arguments
+- `t` - `table` (required) the table to get the length of
+### Example
+```lua
+local myTable = {2, 5, 4, 7, 1}
+local length = table.length(myTable) --should return 5
 ```
