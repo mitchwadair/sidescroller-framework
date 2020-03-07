@@ -1,10 +1,10 @@
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/mitchwadair/sidescroller-framework/blob/master/LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contribute)
-[![GitHub Release](https://img.shields.io/github/release/mitchwadair/sidescroller-framework.svg)](https://github.com/mitchwadair/sidescroller-framework/releases)
-[![GitHub Downloads](https://img.shields.io/github/downloads/mitchwadair/sidescroller-framework/total.svg)](https://github.com/mitchwadair/sidescroller-framework/releases)
-
-# SFramework
-Welcome to SFramework!
+<p align='center'>
+  <img src='https://i.imgur.com/4704rMD.png'><br>
+  <a href="LICENSE"><img src='https://img.shields.io/apm/l/atomic-design-ui.svg' alt="license"></a>
+  <a href="#contribute"><img src='https://img.shields.io/badge/PRs-welcome-brightgreen.svg' alt="contribute"></a>
+  <a href="https://github.com/mitchwadair/sidescroller-framework/releases"><img src='https://img.shields.io/github/release/mitchwadair/sidescroller-framework.svg' alt="release"></a>
+  <a href="https://github.com/mitchwadair/sidescroller-framework/releases"><img src='https://img.shields.io/github/downloads/mitchwadair/sidescroller-framework/total.svg' alt="downloads"></a>
+</p>
 
 ## Overview
 SFramework is a framework for [CraftStudio](https://sparklinlabs.itch.io/craftstudio) to facilitate easier development of 2D games.
