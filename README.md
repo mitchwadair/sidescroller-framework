@@ -1,5 +1,5 @@
 <p align='center'>
-  <img src='https://i.imgur.com/4704rMD.png'><br>
+  <img src='https://i.imgur.com/4704rMD.png'><br><br>
   <a href="LICENSE"><img src='https://img.shields.io/apm/l/atomic-design-ui.svg' alt="license"></a>
   <a href="#contribute"><img src='https://img.shields.io/badge/PRs-welcome-brightgreen.svg' alt="contribute"></a>
   <a href="https://github.com/mitchwadair/sidescroller-framework/releases"><img src='https://img.shields.io/github/release/mitchwadair/sidescroller-framework.svg' alt="release"></a>
