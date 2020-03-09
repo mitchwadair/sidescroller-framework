@@ -1,4 +1,9 @@
---[[ Made by Mitchell Adair https://github.com/mitchwadair ]]--
+-- Copyright (c) 2020 Mitchell Adair
+-- 
+-- (https://github.com/mitchwadair)
+--  
+-- This software is released under the MIT License.
+-- https://opensource.org/licenses/MIT
 
 --[[
     Gets the sprite renderer from the calling GameObject
