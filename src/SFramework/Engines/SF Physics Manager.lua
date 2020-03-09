@@ -275,10 +275,14 @@ function Behavior:ResolveCollision(obj1, obj2, data)
     impulseMagnitude = impulseMagnitude / (obj1.physics.inverseMass + obj2.physics.inverseMass)
     
     local impulse = data.normal * impulseMagnitude
-    obj1.physics.velocity = obj1.physics.velocity + (obj1.physics.inverseMass*impulse)
+    local frictionCoeff = obj1.physics.friction * obj2.physics.friction
+    local friction = Vector3:New(data.normal.y * frictionCoeff, data.normal.x * frictionCoeff, 0)/60
+    obj1.physics.velocity = obj1.physics.velocity + (obj1.physics.inverseMass*impulse) - (friction*obj1.physics.inverseMass*Vector3:New(math.sign(obj1.physics.velocity.x), math.sign(obj1.physics.velocity.y), 0))
     if math.abs(obj1.physics.velocity.y) <= .05 * SF.physics.gravity then obj1.physics.velocity.y = 0 end
-    obj2.physics.velocity = obj2.physics.velocity - (obj2.physics.inverseMass*impulse)
+    if math.abs(obj1.physics.velocity.x) <= .02 then obj1.physics.velocity.x = 0 end
+    obj2.physics.velocity = obj2.physics.velocity - (obj2.physics.inverseMass*impulse) + (friction*obj2.physics.inverseMass*Vector3:New(math.sign(obj2.physics.velocity.x), math.sign(obj2.physics.velocity.y), 0))
     if math.abs(obj2.physics.velocity.y) <= .05 * SF.physics.gravity then obj2.physics.velocity.y = 0 end
+    if math.abs(obj2.physics.velocity.x) <= .02 then obj2.physics.velocity.x = 0 end
     
     obj1.transform:SetPosition(obj1.transform:GetPosition() + (data.normal * data.depth))
     obj1.transform:SetPosition(obj1.transform:GetPosition() + Vector3:New(0, .0002, 0))

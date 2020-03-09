@@ -5,6 +5,7 @@ mass number 1
 static boolean False
 bounciness number 0
 colliderType string "BOX"
+friction number 1
 /PublicProperties]]
 --[[ Made by Mitchell Adair https://github.com/mitchwadair ]]--
 
@@ -25,6 +26,7 @@ function Behavior:Awake()
     if not self.static and self.mass > 0 then self.inverseMass = 1/self.mass end
     
     self.colliderType = string.upper(self.colliderType) --make it more robust
+    self.friction = math.clamp(self.friction, 0, 1) --ensure a value between 0 and 1
     
     self.velocity = Vector3:New(0, 0, 0)
 end
@@ -207,6 +209,30 @@ function Behavior:SetColliderType(type)
     end
     
     self.colliderType = upperCase
+end
+
+--[[
+    Returns the physics object's friction coefficient
+    
+    @return the friction coefficient of the physics object
+]]--
+function Behavior:GetFriction()
+    return self.friction
+end
+
+--[[
+    Sets the physics object's friction coefficient to the given value
+    
+    @param friction the friction coefficient to set to
+]]--
+function Behavior:SetFriction(friction)
+    if friction == nil then
+        error("missing required argument 'friction' in SetFriction call")
+        return
+    end
+    local f = math.clamp(math.abs(friction), 0, 1)
+    
+    self.friction = f
 end
 
 function Behavior:Update()

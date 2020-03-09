@@ -21,11 +21,11 @@ First, select your game object, and add a new scripted behavior
 ## Setting Values
 The default values for the Physics component are good, but in some cases, you might need to change the values to fit your game object.
 
-**NOTE: If you want a circle collider for your object, set the `height` value to 0** 
+**NOTE: If you are using a circle collider, the `height` value will not be considered** 
 
-![](https://i.imgur.com/KHZaLfq.png)
+![](https://i.imgur.com/Q4IzV4j.png)
 
 # Visualizing the Collider
-It is not very apparent when adding Physics to your object what your collider will look like.  To visualize it, you can use SFramework's sample box and circle sprites.  Just add a child game object and center it on your game object.  Then, add a TextRenderer using the correct collider sprite and adjust the child object's scale to fit your sprite.  These stretch values are what you will use as the width and height of your Physics component.
+It is not very apparent when adding Physics to your object what your collider will look like.  To visualize it, you can use SFramework's sample box, triangle, and circle sprites.  Just add a child game object and center it on your game object.  Then, add a TextRenderer using the correct collider sprite and adjust the child object's scale to fit your sprite.  These stretch values are what you will use as the width and height of your Physics component.  Make sure you are using a space (' ') as your TextRenderer's text value to display the collider visualizer correctly.
 
 ![](https://i.imgur.com/4DMW0tm.png)
