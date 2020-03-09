@@ -2,7 +2,7 @@
 In this tutorial, we will be adding the Physics component to a game object.
 
 # Contents
-- [Adding the Component](#adding-the-component)\
+- [Adding the Component](#adding-the-component)
   - [Add the Behavior](#add-the-behavior)
   - [Setting Values](#setting-values)
 - [Visualizing the Collider](#visualizing-the-collider)
@@ -19,7 +19,7 @@ First, select your game object, and add a new scripted behavior
 ![](https://i.imgur.com/Iuqo0ti.png)
 
 ## Setting Values
-The default values for the Physics component are good, but in some cases, you might need to change the values to fit your game object.
+The default values for the Physics component are good, but in some cases, you might need to change the values to fit your game object.  Most commonly you'll need to change the collider's width and height, and possibly the collider shape too.
 
 **NOTE: If you are using a circle collider, the `height` value will not be considered** 
 

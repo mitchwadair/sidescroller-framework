@@ -18,6 +18,5 @@ Here, you can find all the information you need on how to use SFramework as well
     - [table](API/LUA_Library_Extensions/table.md)
 - [Contribute](Contribute)
 - [Tutorials](Tutorials)
-  - [Setting up a Simple Sprite with Animations](Tutorials/adding_physics_to_a_gameobject.md)
-  - [Adding Physics to a Game Object](Tutorials/setting_up_a_simple_sprite_with_animation.md)
-
+  - [Setting up a Simple Sprite with Animations](Tutorials/setting_up_a_simple_sprite_with_animation.md)
+  - [Adding Physics to a Game Object](Tutorials/adding_physics_to_a_gameobject.md)
