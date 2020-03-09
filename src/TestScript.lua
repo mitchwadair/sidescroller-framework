@@ -7,9 +7,10 @@ function Behavior:Awake()
 end
 
 function Behavior:Start()
-    self.gameObject.physics:ApplyImpulse(Vector3:New(-.2, 0, 0))
+    self.gameObject.physics:ApplyImpulse(Vector3:New(0, 0, 0))
 end
 
 function Behavior:Update()
-    --self.gameObject.physics.velocity.x = .1
+    --self.gameObject.physics.velocity.x = -.1
+    --print(self.gameObject.physics.velocity)
 end

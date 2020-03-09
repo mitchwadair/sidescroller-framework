@@ -18,6 +18,8 @@ Physics component handles object physics.
   - [SetStatic](#physicssetstatic)
   - [GetColliderType](#physicsgetcollidertype)
   - [SetColliderType](#physicssetcollidertype)
+  - [GetFriction](#physicsgetfriction)
+  - [SetFriction](#physicssetfriction)
   - [ApplyImpulse](#physicsapplyimpulse)
   
 #Physics
@@ -31,6 +33,7 @@ Physics.bounciness
 Physics.velocity
 Physics.static
 Physics.colliderType
+Physics.friction
 ```
 
 ## Physics:GetMass
@@ -137,12 +140,28 @@ local myCollider = self.gameObject.physics:GetColliderType()
 ```
 
 ## Physics:SetColliderType
-Sets the velocity of the Physics object to the given vector
+Sets the collider type of the Physics object to the value
 ### Arguments
 - `type` - `string` (required) the collider type to set to
 ### Example
 ```lua
 self.gameObject.physics:SetColliderType('CIRCLE')
+```
+
+## Physics:GetFriction
+Returns the friction coefficient of the object
+### Example
+```lua
+local myFrictionCoefficient = self.gameObject.physics:GetFriction()
+```
+
+## Physics:SetFriction
+Sets the friction coefficient of the Physics object to the given value.  This should be a value between 0 and 1
+### Arguments
+- `type` - `number` (required) the friction coefficient to set to
+### Example
+```lua
+self.gameObject.physics:SetFriction(.5)
 ```
 
 ## Physics:ApplyImpulse
