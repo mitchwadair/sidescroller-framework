@@ -20,11 +20,11 @@ SFramework gives you simple 2D physics tools that will help you with collisions 
 
 
 ## Learn
-API documentation and tutorials can be found in the [doc](/docs) folder of this repository.
+API documentation and tutorials can be found in the [doc](./docs) folder of this repository.
 
 If there are any questions or need help with something, feel free to [open an issue](https://github.com/mitchwadair/sidescroller-framework/issues) and tag it with 'question' or 'help wanted'.
 
 ## Contribute
 I welcome contributions to this project!
 
-It is not very intuitive to use CraftStudio with source control, so a tutorial on how you can make contributions can be found [here](docs/Contribute).
+It is not very intuitive to use CraftStudio with source control, so a tutorial on how you can make contributions can be found [here](./docs/Contribute).
