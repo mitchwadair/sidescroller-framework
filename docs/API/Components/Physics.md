@@ -22,7 +22,7 @@ Physics component handles object physics.
   - [SetFriction](#physicssetfriction)
   - [ApplyImpulse](#physicsapplyimpulse)
   
-#Physics
+# Physics
  
 ## Accessors
 ```lua
