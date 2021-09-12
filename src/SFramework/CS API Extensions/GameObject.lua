@@ -51,7 +51,7 @@ function GameObject:AddPhysics(colliderType, width, height, mass, static, bounci
     if static ~= nil then defaults.static = static else defaults.static = false end
     if bounciness ~= nil then defaults.bounciness = bounciness else defaults.bounciness = 0 end
     
-    return self:CreateScriptedBehavior(CS.FindAsset("SFramework/Components/PhysicsObject", "Script"), defaults)
+    return self:CreateScriptedBehavior(CS.FindAsset("SFramework/Components/Physics", "Script"), defaults)
 end
 
 --[[
