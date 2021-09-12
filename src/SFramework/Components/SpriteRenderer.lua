@@ -17,7 +17,7 @@ function Behavior:Awake()
     self.isAnimationPlaying = false
     
     --functional vars
-    self.animCounter = 0
+    self.animCounter = 1
     
     --construct
     if self.gameObject.textRenderer == nil then
@@ -158,7 +158,7 @@ end
 function Behavior:Update()
     if self.isAnimationPlaying then
         local newFrame = false
-        if ((self.animSpeed-1) / self.animCounter == 1) or self.animSpeed == 1 then
+        if self.animCounter >= self.animSpeed then
             newFrame = true
             self.currentAnimFrame = self.currentAnimFrame + 1
             if self.currentAnimFrame >= self.numFrames then
@@ -171,7 +171,7 @@ function Behavior:Update()
         end
         if newFrame then
             self.gameObject.textRenderer:SetText(string.char(self.currentAnimFrame + 32))
-            self.animCounter = 0
+            self.animCounter = 1
         else
             self.animCounter = self.animCounter + 1
         end
