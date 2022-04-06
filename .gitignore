@@ -1,0 +1,7 @@
+.vscode/settings.json
+
+# Ignores all files/directories not within src/SFramework
+# This allows you to create any necessary test files/folders at the root of SFramework
+# without affecting the repo
+src/*
+!src/SFramework
