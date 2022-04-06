@@ -30,9 +30,5 @@ end
     @return the length of the table
 ]]--
 function table.length(t)
-    local count = 0
-    for k,v in pairs(t) do
-        count = count + 1
-    end
-    return count
+    return table.getn(t)
 end
