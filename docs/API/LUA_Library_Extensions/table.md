@@ -20,11 +20,14 @@ local index = table.indexOf(myTable, 4) --should return 3
 ```
 
 ## table.length
-Returns the length of the given table.  This is an alias for `table.getn`
+Returns the length of the given table.  This will work for both arrays and keyed tables
 ### Arguments
 - `t` - `table` (required) the table to get the length of
 ### Example
 ```lua
-local myTable = {2, 5, 4, 7, 1}
-local length = table.length(myTable) --should return 5
+local myArrayTable = {2, 5, 4, 7, 1}
+local arrayLength = table.length(myArrayTable) --should return 5
+
+local myKeyedTable = {x = 1, y = 2}
+local tableLength = table.length(myKeyedTable) --should return 2
 ```
