@@ -49,7 +49,7 @@ Sets the animation of the SpriteRenderer to the given spritesheet Font asset
 self.gameObject.spriteRenderer:SetAnimation(CS.FindAsset("Sprites/Sample/Animations/Idle", "Font"))
 ```
 
-## SpriteRenderer:SetAnimatinFrameDuration
+## SpriteRenderer:SetAnimationFrameDuration
 Sets the animation's frame duration of the SpriteRenderer to the given number of game ticks.  Keep in mind that there are 60 ticks per second in CraftStudio.  So for instance, if you want to play an animation at 5 frames per second then you would divide 60 by 5 to get the number of ticks.  The default frame duration is 5 ticks.
 ### Arguments
 - `ticks` - `number` (required) the number of game ticks per frame of the animation

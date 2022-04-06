@@ -20,7 +20,7 @@ local index = table.indexOf(myTable, 4) --should return 3
 ```
 
 ## table.length
-Returns the length of the given table
+Returns the length of the given table.  This is an alias for `table.getn`
 ### Arguments
 - `t` - `table` (required) the table to get the length of
 ### Example
