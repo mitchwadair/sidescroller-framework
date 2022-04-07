@@ -10,7 +10,7 @@ setmetatable(Vector2, Vector3)
     @return the Vector3 representation
 ]]--
 function Vector2:New(x, y)
-    return Vector3:New(x, y, 0)
+    return Vector3:New(x, y or x, 0)
 end
 
 --[[
