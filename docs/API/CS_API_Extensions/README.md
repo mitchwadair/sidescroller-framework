@@ -3,3 +3,4 @@ SFramework extends upon some of the capability built into CraftStudio. Here, you
 
 # Contents
 - [GameObject](GameObject.md)
+- [Vector2](Vector2.md)

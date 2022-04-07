@@ -5,6 +5,7 @@ Here you'll find information about SFramework's API.
 - [SFramework](SFramework.md)
 - [CS API Extensions](CS_API_Extensions)
   - [GameObject](CS_API_Extensions/GameObject.md)
+  - [Vector2](CS_API_Extensions/Vector2.md)
 - [Components](Components)
   - [SpriteRenderer](Components/SpriteRenderer.md)
   - [Physics](Components/Physics.md)
