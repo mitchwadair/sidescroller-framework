@@ -8,6 +8,7 @@ Here, you can find all the information you need on how to use SFramework as well
   - [SFramework](API/SFramework.md)
   - [CS API Extensions](API/CS_API_Extensions)
     - [GameObject](API/CS_API_Extensions/GameObject.md)
+    - [Vector2](API/CS_API_Extensions/Vector2.md)
   - [Components](API/Components)
     - [SpriteRenderer](API/Components/SpriteRenderer.md)
     - [Physics](API/Components/Physics.md)
